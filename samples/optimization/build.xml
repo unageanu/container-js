@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="optimization sample" default="build" basedir=".">
+
+    <property name="dest.dir" value="dst" />
+    
+    <property name="rhino.home" value="../../tools/rhino1_7R3" />
+    <property name="closure-compiler.home" value="../../tools/compiler-20120710" />
+  
+    <target name="clean">
+        <delete dir="${dest.dir}" />
+    </target>
+    
+    <target name="build" depends="clean">
+        <java fork='true' dir="${basedir}" classname="org.mozilla.javascript.tools.shell.Main">
+            <classpath>
+                <path path="${rhino.home}/js.jar" />
+                <path path="${closure-compiler.home}/compiler.jar" />
+            </classpath>
+            <jvmarg line="-Xss1m"/>
+            <arg line="../../tools/r.js -o profile.js optimize=closure"/>
+        </java>
+    </target>
+</project>
