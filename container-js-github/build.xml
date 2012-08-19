@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="container-js release" default="package" basedir=".">
+
+    <property name="target.archive" value="./dst/container-js.zip" />
+    
+    <property name="test.dir" value="test" />
+    
+    <property name="rhino.home" value="./tools/rhino1_7R3" />
+    <property name="jasmine.home" value="./lib-test/jasmine-1.0.2" />
+    <property name="jasmine-reporters.home" value="./lib-test/larrymyers-jasmine-reporters-adf6227" />
+    <property name="envjs.home" value="./lib-test/thatcher-env-js-cb738b9" />
+    <property name="closure-compiler.home" value="./tools/compiler-20120710" />
+  
+    <target name="clean">
+        <delete dir="./minified" />
+        <delete file="${target.archive}" />
+    </target>
+
+    <target name="test">
+        <java jar="${rhino.home}/js.jar" fork='true' dir="test">
+            <arg line="-opt -1 cui.js"/>
+            <sysproperty key="envjs.home" value="../${envjs.home}"/>
+        </java>
+    </target>
+    
+    <target name="test.minified.module">
+        <java jar="${rhino.home}/js.jar" fork='true' dir="test">
+            <arg line="-opt -1 cui.js"/>
+            <sysproperty key="envjs.home" value="../${envjs.home}"/>
+            <sysproperty key="config" value="config-for-minified-module.js"/>
+        </java>
+    </target>
+    
+    <target name="minify">
+        <java fork='true' dir="${basedir}" classname="org.mozilla.javascript.tools.shell.Main">
+            <classpath>
+                <path path="${rhino.home}/js.jar" />
+                <path path="${closure-compiler.home}/compiler.jar" />
+            </classpath>
+            <jvmarg line="-Xss1m"/>
+            <arg line="tools/r.js -o name=container out=minified/container.js baseUrl=src optimize=closure"/>
+        </java>
+    </target>
+    
+    <target name="package" depends="clean,test,minify,test.minified.module">
+        <mkdir dir="dst" />
+        <zip destfile="${target.archive}">
+            <zipfileset dir=".">
+                <include name="minified/**" />
+                <include name="src/**" />
+                <include name="test/**" />
+                <include name="lib/**" />
+                <include name="lib-test/**" />
+                <include name="samples/**" />
+                <include name="tools/**" />
+                <include name="README.txt" />
+                <include name="CHANGES.txt" />
+            </zipfileset>
+        </zip>
+    </target>
+</project>
