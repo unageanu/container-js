@@ -1,43 +1,43 @@
-# �T�v
+# 概要
 
-ContainerJS�́AJavaScript�A�v���P�[�V�����p�� Dipendency Injection �R���e�i�ł��B
+ContainerJSは、JavaScriptアプリケーション用の Dipendency Injection コンテナです。
 
-# ����
+# 特徴
 
-- **�ˑ��֌W�̉����ƒ���**
- - ContainerJS�́A�R���e�i�Ǘ��Ƃ��ꂽ�I�u�W�F�N�g(=�R���|�[�l���g�ƌĂт܂�)�̐����ƁA���̈ˑ��R���|�[�l���g�̉����E������S���܂��B
-     - �ˑ��֌W�́AJavaScript�R�[�h�ɂ��R���|�[�l���g��`�̒��Ŏw�肷�邩�A�N���X���Ő錾�I�ɒ�`�ł��܂��B
-     - JavaScript�ɂ̓C���^�[�t�F�C�X���Ȃ��̂ŁA�ˑ��֌W�̉����̓R���|�[�l���g�Ɋ��蓖�Ă�ꂽ���O�ōs���܂��B
- - �ˑ����������R���e�i�ɔC���邱�ƂŁA�ˑ��֌W���l�����C���X�^���X�𐶐����Q�Ƃ�ݒ肷�鏈��(�����郏�C�������O)���������ł��܂��B
- - �R���|�[�l���g�̓R���e�i�ɂ��L���b�V�������̂ŁA�s�v�ȃI�u�W�F�N�g�̐������팸����܂��B
+- **依存関係の解決と注入**
+ - ContainerJSは、コンテナ管理とされたオブジェクト(=コンポーネントと呼びます)の生成と、その依存コンポーネントの解決・注入を担います。
+     - 依存関係は、JavaScriptコードによるコンポーネント定義の中で指定するか、クラス内で宣言的に定義できます。
+     - JavaScriptにはインターフェイスがないので、依存関係の解決はコンポーネントに割り当てられた名前で行われます。
+ - 依存性注入をコンテナに任せることで、依存関係を考慮しつつインスタンスを生成し参照を設定する処理(いわゆるワイヤリング)を自動化できます。
+ - コンポーネントはコンテナによりキャッシュされるので、不要なオブジェクトの生成も削減されます。
 
-- **���W���[���̒x���ǂݍ��݂ɑΉ�**
- - require.js�ƘA�g���A�K�v�ȃ��W���[����񓯊��Œx���ǂݍ��݂��܂��B
- - ���[�U�[�̑��쓙���󂯂ăR���|�[�l���g�����ۂɎg����܂ŁAJavaScript�\�[�X�̓ǂݍ��݂ƕ]����x���ł��܂��B
+- **モジュールの遅延読み込みに対応**
+ - require.jsと連携し、必要なモジュールを非同期で遅延読み込みします。
+ - ユーザーの操作等を受けてコンポーネントが実際に使われるまで、JavaScriptソースの読み込みと評価を遅延できます。
 
-- **�A�X�y�N�g�w���v���O���~���O���T�|�[�g**
- - �R���e�i�Ǘ��̃R���|�[�l���g�Ƀ��\�b�h�E�C���^�[�Z�v�^���������߂܂��B
- - ���\�v�����O�̏o�͂ȂǁA�N���X���f�I�ȋ@�\���C���^�[�Z�v�^�ɏW��ł��܂��B
+- **アスペクト指向プログラミングをサポート**
+ - コンテナ管理のコンポーネントにメソッド・インターセプタを差し込めます。
+ - 性能計測ログの出力など、クラス横断的な機能をインターセプタに集約できます。
 
-# ���C�Z���X
+# ライセンス
 [New BSD License](http://opensource.org/licenses/BSD-3-Clause) 
 
 
-# ����m�F�ς݃u���E�U
+# 動作確認済みブラウザ
 
 - IE9+
 - GoogleChrome
 - Firefox4+
 
-��ECMAScript5�̋@�\���g�p���Ă��܂��B
+※ECMAScript5の機能を使用しています。
 
-# �ˑ����W���[��
+# 依存モジュール
 
-ContainerJS�͈ȉ��̃��W���[���Ɉˑ����Ă��܂��B
+ContainerJSは以下のモジュールに依存しています。
 
 - [RequireJS](http://requirejs.org/) ( [New BSD or MIT License](https://github.com/jrburke/requirejs/blob/master/LICENSE) )
 
-�܂��A�ȉ��̃e�X�e�B���O�t���[�����[�N���g�p���Ă��܂��B
+また、以下のテスティングフレームワークを使用しています。
 
 - [jasmine](https://github.com/pivotal/jasmine/) ( [MIT License](https://github.com/pivotal/jasmine/blob/master/MIT.LICENSE) )
 - [jasmine-reporters](https://github.com/larrymyers/jasmine-reporters) ( [MIT License](https://github.com/larrymyers/jasmine-reporters/blob/master/LICENSE) )
@@ -46,9 +46,9 @@ ContainerJS�͈ȉ��̃��W���[���Ɉˑ����Ă��܂��B
 
 # Getting started
 
-�uHello World�v���o�͂���T���v���ł��Bsamples/hello-world �ȉ��Ɋ��S�ȃ\�[�X������̂ł�������Q�Ƃ��������B
+「Hello World」を出力するサンプルです。samples/hello-world 以下に完全なソースがあるのでそちらも参照ください。
 
-�t�@�C���\��:
+ファイル構造:
 
 - index.html
 - scripts/
@@ -156,32 +156,32 @@ index.html:
       </body>
     </html>
 
-# ���t�@�����X
+# リファレンス
 
 ## Binding
 
-�ȉ���5�̎�i�ł̃R���|�[�l���g�o�^���T�|�[�g���Ă��܂��B
+以下の5つの手段でのコンポーネント登録をサポートしています。
 
-- �N���X�w��
-- �v���g�^�C�v�w��
-- �I�u�W�F�N�g�w��
-- �v���o�C�_�w��
-- �C���X�^���X�w��
+- クラス指定
+- プロトタイプ指定
+- オブジェクト指定
+- プロバイダ指定
+- インスタンス指定
 
-### �N���X�w��
+### クラス指定
 
-- �R���|�[�l���g���N���X(�R���X�g���N�^�֐�)�Ŏw�肵�܂��B
-- �R���X�g���N�^�֐��� `new` ���Z�q�t���ŌĂяo���č쐬���ꂽ�I�u�W�F�N�g���R���|�[�l���g�ƂȂ�܂��B
-- �R���X�g���N�^�֐��́Arequire.js�� `require()` ���g�p���Ĕ񓯊��ǂݍ��݂���܂��B
-- `withConstructorArgument()` �ŁA�R���X�g���N�^�֐��ɓn���������ЂƂ����w��ł��܂��B 
+- コンポーネントをクラス(コンストラクタ関数)で指定します。
+- コンストラクタ関数を `new` 演算子付きで呼び出して作成されたオブジェクトがコンポーネントとなります。
+- コンストラクタ関数は、require.jsの `require()` を使用して非同期読み込みされます。
+- `withConstructorArgument()` で、コンストラクタ関数に渡す引数をひとつだけ指定できます。 
 
-�R���|�[�l���g��`:
+コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("app.Class");
         binder.bind("anotherName").to("app.Class").withConstructorArgument({
             foo:"foo",
-            var:ContainerJS.Inject("app.Class") // �ˑ����������\
+            var:ContainerJS.Inject("app.Class") // 依存性注入も可能
         });
     });
 
@@ -199,18 +199,18 @@ app/class.js:
     });
 
 
-### �v���g�^�C�v�w��
+### プロトタイプ指定
 
-- �R���|�[�l���g���v���g�^�C�v�Ŏw�肵�܂��B
-- �v���g�^�C�v�������Ƃ��āA`Object#create()`�ō쐬���ꂽ�I�u�W�F�N�g���R���|�[�l���g�ƂȂ�܂��B
-- �v���g�^�C�v�́Arequire.js�� `require()` ���g�p���Ĕ񓯊��ǂݍ��݂���܂��B
+- コンポーネントをプロトタイプで指定します。
+- プロトタイプを引数として、`Object#create()`で作成されたオブジェクトがコンポーネントとなります。
+- プロトタイプは、require.jsの `require()` を使用して非同期読み込みされます。
 
-�R���|�[�l���g��`:
+コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("app.Prototype").asProrotype();
         binder.bind("anotherName").toPrototype("app.Prototype", {
-           foo : { value: "foo" } // ��2������Object#create()�ɓn���������w��ł��܂�
+           foo : { value: "foo" } // 第2引数でObject#create()に渡す引数を指定できます
         });
     });
 
@@ -228,11 +228,11 @@ app/prototype.js:
         return Prototype;
     });
 
-### �I�u�W�F�N�g�w��
+### オブジェクト指定
 
-- require.js��`require` ���g�p���ă��[�h���ꂽ�I�u�W�F�N�g���̂��̂��R���|�[�l���g�ɂ��܂��B
+- require.jsの`require` を使用してロードされたオブジェクトそのものをコンポーネントにします。
 
-�R���|�[�l���g��`:
+コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("app.Object").asObject();
@@ -251,12 +251,12 @@ app/object.js:
     });
 
 
-### �v���o�C�_�w��
+### プロバイダ指定
 
-- �R���|�[�l���g�𐶐�����֐����w�肵�܂��B
-- �֐��̖߂�l���R���|�[�l���g�ƂȂ�܂��B
+- コンポーネントを生成する関数を指定します。
+- 関数の戻り値がコンポーネントとなります。
 
-�R���|�[�l���g��`:
+コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("name").toProvider(function(){
@@ -264,11 +264,11 @@ app/object.js:
         });
     });
 
-### �C���X�^���X�w��
+### インスタンス指定
 
-- �R���|�[�l���g���̂��̂��w�肵�܂��B
+- コンポーネントそのものを指定します。
 
-�R���|�[�l���g��`:
+コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("name").toInstance("foo");
@@ -276,14 +276,14 @@ app/object.js:
 
 ## Packaging Policy
 
-Packaging Policy��ݒ肷�邱�ƂŁA���W���[���̓ǂݍ��ݐ�𐧌�ł��܂��B
+Packaging Policyを設定することで、モジュールの読み込み先を制御できます。
 
 ### MODULE\_PER\_CLASS
 
-�f�t�H���g�̃|���V�[�ł��B�N���X���ƂɃ��W���[�����p�ӂ���Ă���Ƃ݂Ȃ��܂��B
-�R���|�[�l���g�́A���O��ԂƓ����p�X�ȉ��� `<�N���X����-��؂�ɂ�������>.js` ����ǂݍ��܂�܂��B 
+デフォルトのポリシーです。クラスごとにモジュールが用意されているとみなします。
+コンポーネントは、名前空間と同じパス以下の `<クラス名を-区切りにしたもの>.js` から読み込まれます。 
 
-�t�@�C���\��:
+ファイル構成:
 
 - app/
     - foo/
@@ -320,9 +320,9 @@ main.js:
 
 ### MODULE\_PER\_PACKAGE
 
-�p�b�P�[�W���ƂɃ��W���[�����p�ӂ���Ă���Ƃ݂Ȃ��܂��B
+パッケージごとにモジュールが用意されているとみなします。
 
-�t�@�C���\��:
+ファイル構成:
 
 - app/
     - foo.js
@@ -359,9 +359,9 @@ main.js:
 
 ### SINGLE_FILE
 
-1�̃t�@�C���ɖ��O��ԓ��̂��ׂẴN���X����`����Ă���Ƃ݂Ȃ��܂��B
+1つのファイルに名前空間内のすべてのクラスが定義されているとみなします。
 
-�t�@�C���\��:
+ファイル構成:
 
 - app.js
 - main.js
@@ -399,19 +399,19 @@ main.js:
 
 ## Scope
 
-�uSingleton�v,�uEagerSingleton�v,�uPrototype�v���T�|�[�g���܂��B�f�t�H���g�́uSingleton�v�ł��B
+「Singleton」,「EagerSingleton」,「Prototype」をサポートします。デフォルトは「Singleton」です。
 
 - **Singleton**
-    - �R���|�[�l���g��1�����������܂��B
-    - �����񓯂��R���|�[�l���g���擾�����ꍇ�A��ɏ����get()���ɍ쐬�����R���|�[�l���g���Ԃ���܂��B
-    - �R���|�[�l���g�� `Container#destroy()` �Ŕj������܂��B
+    - コンポーネントを1つだけ生成します。
+    - 複数回同じコンポーネントを取得した場合、常に初回のget()時に作成したコンポーネントが返されます。
+    - コンポーネントは `Container#destroy()` で破棄されます。
 - **EagerSingleton**
-    - Singleton�Ɠ������B��̃C���X�^���X��Ԃ��܂����A�C���X�^���X���R���e�i�̍쐬���ɐ�������܂��B(Singleton�̏ꍇ�A�R���e�i���珉�߂ăR���|�[�l���g���擾�����ۂɐ�������܂��B)
-    - ������g���ƁA�R���e�i�ɓo�^���Ă��������Ō��ʂ𔭊�����R���|�[�l���g���쐬�ł��܂��B
+    - Singletonと同じく唯一のインスタンスを返しますが、インスタンスがコンテナの作成時に生成されます。(Singletonの場合、コンテナから初めてコンポーネントを取得した際に生成されます。)
+    - これを使うと、コンテナに登録しておくだけで効果を発揮するコンポーネントを作成できます。
 - **Prototype**
-    - �R���|�[�l���g�擾�̂��тɁA�R���|�[�l���g���č쐬���܂��B
+    - コンポーネント取得のたびに、コンポーネントを再作成します。
 
-�ݒ�̕ύX�́A `inScope()` �ōs���܂��B
+設定の変更は、 `inScope()` で行います。
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("Foo").inScope( ContainerJS.Scope.SINGLETON ); // default
@@ -421,15 +421,15 @@ main.js:
 
 ## Injection
 
-�v���p�e�B�� `ContainerJS.Inject` ��ݒ肵�Ă����ƁA�R���e�i�ɂ��ˑ����W���[�����T�����꒍������܂��B
+プロパティに `ContainerJS.Inject` を設定しておくと、コンテナにより依存モジュールが探索され注入されます。
 
-- `ContainerJS.Inject` ��ݒ肷��ƁA�v���p�e�B���ŃR���|�[�l���g���T������܂��B
-- `ContainerJS.Inject(name)` �ŁA�T������R���|�[�l���g���𖾎��ł��܂��B
-- `ContainerJS.Inject.all`,`ContainerJS.Inject.all(name)` �ŁA�w�肳�ꂽ���O�����R���|�[�l���g�̔z�񂪒�������܂��B
-- `ContainerJS.Inject.lazily`,`ContainerJS.Inject.lazily(name)`,`ContainerJS.Inject.all.lazily`,`ContainerJS.Inject.all.lazily(name)` �ŁA���������R���|�[�l���g���x���ǂݍ��݂����悤�ɂȂ�܂��B
-  - �R���|�[�l���g�ł͂Ȃ��A�R���|�[�l���g���擾���邽�߂�Deferred����������܂��B
+- `ContainerJS.Inject` を設定すると、プロパティ名でコンポーネントが探索されます。
+- `ContainerJS.Inject(name)` で、探索するコンポーネント名を明示できます。
+- `ContainerJS.Inject.all`,`ContainerJS.Inject.all(name)` で、指定された名前を持つコンポーネントの配列が注入されます。
+- `ContainerJS.Inject.lazily`,`ContainerJS.Inject.lazily(name)`,`ContainerJS.Inject.all.lazily`,`ContainerJS.Inject.all.lazily(name)` で、注入されるコンポーネントが遅延読み込みされるようになります。
+  - コンポーネントではなく、コンポーネントを取得するためのDeferredが注入されます。
 
-��:
+例:
 
     define(["container"], function(ContainerJS){
         /**
@@ -453,7 +453,7 @@ main.js:
         return Class;
     });
 
-�R���|�[�l���g��`���ɒ������邱�Ƃ��ł��܂��B
+コンポーネント定義時に注入することもできます。
 
     var container = new ContainerJS.Container( function( binder ){
         binder.bind("Foo").withProperties({
@@ -465,23 +465,23 @@ main.js:
 
 ## Initialization and Destruction
 
-�R���|�[�l���g�쐬���ɌĂ΂��֐�(�������֐�)�Ɣj�����ɌĂ΂��֐�(�j���֐�)��o�^�ł��܂��B
+コンポーネント作成時に呼ばれる関数(初期化関数)と破棄時に呼ばれる関数(破棄関数)を登録できます。
 
-- �������֐��́A�R���|�[�l���g�̍쐬/�ˑ�������/�C���^�[�Z�v�^�̓K�p�����ׂĊ���������Ɏ��s����܂��B
-- �j���֐���container.Container#destroy()�����s�����ۂɈȉ��̏����𖞂����ꍇ�A���s����܂��B
-  - �R���|�[�l���g�̃X�R�[�v��Singleton�܂���EagerSingleton�ł��邱�ƁB
-  - �R���|�[�l���g��destroy()���s���ɍ쐬�ς݂ł��邱�ƁB
-- �������֐��E�j���֐��́A�R���|�[�l���g�̃��\�b�h���Ŏw�肷����@�Ɗ֐��Ŏw�肷����@������܂��B
-  - �֐����w�肵���ꍇ�A�����Ƃ��ăR���|�[�l���g�ƃR���e�i���n����܂��B
+- 初期化関数は、コンポーネントの作成/依存性注入/インターセプタの適用がすべて完了した後に実行されます。
+- 破棄関数はcontainer.Container#destroy()を実行した際に以下の条件を満たす場合、実行されます。
+  - コンポーネントのスコープがSingletonまたはEagerSingletonであること。
+  - コンポーネントがdestroy()実行時に作成済みであること。
+- 初期化関数・破棄関数は、コンポーネントのメソッド名で指定する方法と関数で指定する方法があります。
+  - 関数を指定した場合、引数としてコンポーネントとコンテナが渡されます。
 
-��:
+例:
 
     var c = new ContainerJS.Container( function( binder ) {
         
-        // ���\�b�h���Ŏw��
+        // メソッド名で指定
         binder.bind( "Foo" ).onInitialize("initialize").onDestroy("dispose");
 
-        // �֐��Ŏw��
+        // 関数で指定
         binder.bind( "Bar" ).onInitialize( function( component, container ) {
             component.initialize();
         }).onDestroy( function( component, container ) {
@@ -492,13 +492,13 @@ main.js:
 
 ### Method Interception
 
-�R���|�[�l���g�̃��\�b�h�ɃC���^�[�Z�v�^���������߂܂��B
+コンポーネントのメソッドにインターセプタを差し込めます。
 
-- �C���^�[�Z�v�^�͊֐��Ŏw�肵�܂��B�����Ń��\�b�h����������i�[�����I�u�W�F�N�g���n����܂��B
-- ��2�����ŁA�K�p����R���|�[�l���g����у��\�b�h�������֐����w��ł��܂��B
-  - ��2��������������Ȃ��ꍇ�A���ׂăR���|�[�l���g�̂��ׂẴ��\�b�h�ɓK�p����܂��B
+- インターセプタは関数で指定します。引数でメソッド名や引数を格納したオブジェクトが渡されます。
+- 第2引数で、適用するコンポーネントおよびメソッドを示す関数を指定できます。
+  - 第2引数が明示されない場合、すべてコンポーネントのすべてのメソッドに適用されます。
 
-��:
+例:
 
         var container = new ContainerJS.Container( function( binder ){
             
@@ -507,9 +507,9 @@ main.js:
             binder.bindInterceptor( function( jointpoint ) {
                jointpoint.methodName;
                jointpoint.self;
-               jointpoint.arguments; // �����B���ςł��܂��B
-               jointpoint.context; // ���̃��\�b�h�Ăяo���̊Ԃŋ��L������Ԃ��i�[�ł��܂��B
-               return jointpoint.proceed(); // �I���W�i���̃��\�b�h���Ăяo�����ʂ�Ԃ��܂��B
+               jointpoint.arguments; // 引数。改変できます。
+               jointpoint.context; // このメソッド呼び出しの間で共有される状態を格納できます。
+               return jointpoint.proceed(); // オリジナルのメソッドを呼び出し結果を返します。
             }, function(binding, component, methodName) {
                 if  (binding.name !== "app.Component" ) return false;
                 return methodName === "method1"
