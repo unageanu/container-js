@@ -2,7 +2,7 @@
 
 ContainerJS is a Dependency Injection Continer for JavaScript Application.
 
-# Futures
+# Features
 
 - **Dependency Resolution and Injection**
  - ContainerJS is responsible for the generation of container-managed objects, and the resolution and injection of its dependent components.
@@ -22,7 +22,7 @@ ContainerJS is a Dependency Injection Continer for JavaScript Application.
 # License
 [New BSD License](http://opensource.org/licenses/BSD-3-Clause) 
 
-# Dependent libraries
+# Dependent Libraries
 
 ContainerJS is dependent on the following modules.
 
