@@ -1,6 +1,6 @@
 # About
 
-ContainerJS is a Dependency Injection Continer for JavaScript Application.
+ContainerJS is a Dependency Injection Container for JavaScript Application.
 
 # Features
 
