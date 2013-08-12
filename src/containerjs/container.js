@@ -18,16 +18,19 @@ define([
         this.bindings;
         /** @type {Array.<container.Aspect>} */
         this.aspects;
-        /** @type {Array.<{id:Number, name:string>} */
-        this.creating = [];
+        /** @type {Object.<number, {id:Number, name:string, parentId:number>} */
+        this.creating = {};
         /** @type {Object.<string,*>} */
         this.singletonComponents = {};
         /** @type {container.Container} */
         this.chainedContainer = null;
         
+        this.createRequestSerial = 1;
+        
         this.load(module, this);
         this.loader = loader;
-        this.createEagerSingletonConponents(this);
+        this.onEagerSingletonConponentsInitialized =
+            this.createEagerSingletonConponents(this);
         
         Object.seal(this);
     };
@@ -36,13 +39,14 @@ define([
     /**
      * @public
      * @param {string} name
+     * @param {number?} parentId
      * @return {Promise.<*,*>}
      */
-    prototype.get = function( name ) {
+    prototype.get = function( name, parentId ) {
         return Deferred.lazy( _get, this, arguments );
     };
     /** @private */
-    var _get = function(name) {
+    var _get = function(name, parentId) {
         var binding = null;
         try {
            binding = this.getBinding(name);
@@ -51,19 +55,25 @@ define([
                 ? this.chainedContainer.get(name)
                 : Deferred.errorOf(e);
         }
-        return binding.scope.retrievingStrategy( this, binding );
+        try {
+            this.checkCyclicDependency( binding, parentId );
+        } catch (e) {
+            return Deferred.errorOf( e );
+        }
+        return binding.scope.retrievingStrategy( this, binding, parentId );
     };
     
     /**
      * @public
      * @param {string} name
+     * @param {number?} parentId
      * @return {Promise.<Array.<*>,*>}
      */
-    prototype.gets = function( name ) {
+    prototype.gets = function( name, parentId ) {
         return Deferred.lazy( _gets, this, arguments );
     };
     /** @private */
-    var _gets = function(name) {
+    var _gets = function(name, parentId) {
         var bindings = null;
         try {
             bindings = this.getBindings(name);
@@ -73,9 +83,15 @@ define([
                 : Deferred.errorOf(e);
         }
         
-        var deferreds = bindings.map( function (binding) {
-            return binding.scope.retrievingStrategy( this, binding );
-        }.bind(this));
+        var deferreds = null;
+        try {
+            deferreds = bindings.map( function (binding) {
+                this.checkCyclicDependency( binding, parentId );
+                return binding.scope.retrievingStrategy( this, binding, parentId );
+            }.bind(this));
+        } catch (e) {
+            return Deferred.errorOf( e );
+        }
         
         if (this.chainedContainer && this.chainedContainer.hasBindings(name)) {
             var d = new Deferred();
@@ -144,11 +160,12 @@ define([
     };
     
     /** @private */
-    prototype.createComponent = Deferred.defer( function( binding ) {
-        this.checkCyclicDependency( binding );
-        this.creating.push({id:binding.id, name:binding.name});
+    prototype.createComponent = Deferred.defer( function( binding, parentId ) {
+
+        var requestId = this.createRequestSerial++;
+        this.creating[requestId] = {id:binding.id, name:binding.name, parentId:parentId};
         
-        return binding.getInstance( this ).pipe( function(component){
+        return binding.getInstance( this, requestId ).pipe( function(component){
             try { 
                 this.aspects.forEach(function(aspect){
                     component = aspect.weave( binding, component );
@@ -156,24 +173,24 @@ define([
                 binding.initialize(component,this);
                 return component;
             } finally {
-                this.creating.pop();
+                delete this.creating[requestId];
             }
         }.bind(this), function(error) {
-            this.creating.pop();
+            delete this.creating[requestId];
             return error;
         }.bind(this));
     });
     
     /** @private */
-    prototype.checkCyclicDependency = function( binding ) {
-        var result = this.creating.some( function(idAndName){
-            return idAndName.id === binding.id;
-        });
-        if ( result ) {
-            throw new Error("detect cyclic dependency.\n  -> " + 
-                    this.creating.map(function(idAndName) {
-                        return idAndName.name;
-                    }).concat([binding.name]).join("\n  -> "));
+    prototype.checkCyclicDependency = function( binding, parentId ) {
+        var paths = [binding.name];
+        while( parentId ) {
+            paths.unshift( this.creating[parentId].name );
+            if (this.creating[parentId].id === binding.id) {
+                throw new Error("detect cyclic dependency.\n  -> " + 
+                        paths.join("\n  -> "));
+            }
+            parentId = this.creating[parentId].parentId;
         }
     };
     
@@ -189,12 +206,18 @@ define([
     prototype.createEagerSingletonConponents = function() {
         var f = function( binding ){
             if (binding.scope.createOnStartUp) {
-                binding.scope.retrievingStrategy( this, binding );
-            } 
+                return binding.scope.retrievingStrategy( this, binding );
+            } else {
+                return null;
+            }
         }.bind(this);
+        var deferreds = [];
         for ( var i in this.bindings ) {
-            this.bindings[i].forEach(f);
+            deferreds = deferreds.concat(this.bindings[i].map(f).filter(function(x) { 
+                return x != null;
+            }));
         }
+        return Deferred.when(deferreds);
     };
 
     Object.freeze(prototype);

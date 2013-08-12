@@ -5,13 +5,13 @@ define([
     "use strict";
     
     var retrievingStrategies = {
-        forSingleton : function( container, binding ) {
+        forSingleton : function( container, binding, parentId ) {
             return  container.singletonComponents[binding.id]
                  || (container.singletonComponents[binding.id]
-                       = container.createComponent(binding));
+                       = container.createComponent(binding, parentId));
         },
-        forPrototype : function( container, binding ) {
-            return container.createComponent(binding);
+        forPrototype : function( container, binding, parentId ) {
+            return container.createComponent(binding, parentId);
         }
     };
     var destructionStrategies = {
@@ -29,7 +29,7 @@ define([
     /**
      * @enum {{
      *   retrievingStrategy : 
-     *      function( container.bindings.Binding.<*>, container.Container ):*,
+     *      function( container.bindings.Binding.<*>, container.Container, number? ):*,
      *   destructionStrategy : 
      *      function( container.bindings.Binding.<*>, container.Container ):*,
      *   createOnStartUp : boolean

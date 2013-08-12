@@ -24,20 +24,14 @@ define( [
     var RequireJsLoader = {
         load : function( moduleName ) {
             var d = new Deferred();
-            var originalErrorHandler = require.onError;
             try {
-                require.onError = function(e){
-                    require.onError = originalErrorHandler;
-                    d.reject(e);
-                    if (originalErrorHandler) originalErrorHandler(e);
-                };
                 require( [moduleName], function( module ) {
                     d.resolve(module);
-                    require.onError = originalErrorHandler;
+                }, function(e) {
+                    d.reject(e);
                 });
             } catch (e) {
                 d.reject(e);
-                require.onError = originalErrorHandler;
             }
             return d;
         }

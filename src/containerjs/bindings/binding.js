@@ -65,9 +65,10 @@ define( [
     
     /**
      * @param {container.Container} container
+     * @param {number} requestId
      * @return {Deferred.<X>}
      */
-    Binding.prototype.getInstance = function( container ){};
+    Binding.prototype.getInstance = function( container, requestId ){};
     
     /** 
      * @param {X} component
@@ -91,10 +92,10 @@ define( [
      * @param {container.Container} container
      * @return {Deferred.<X,?>}
      */
-    Binding.prototype.injectProperties = function( component, container ) {
+    Binding.prototype.injectProperties = function( component, container, requestId ) {
         var injectionProperties = this.collectInjectionProperties( component );
         return this.resolveProperties( 
-            injectionProperties, container 
+            injectionProperties, container, null, requestId
         ).pipe( function( values ){
             for ( var i in values ) {
                 if ( !values.hasOwnProperty(i) ) { 
@@ -150,27 +151,27 @@ define( [
     };
     
     /** @private */
-    Binding.prototype.resolveProperty = function( value, container, name ) {
+    Binding.prototype.resolveProperty = function( value, container, name, requestId ) {
         if ( value && Key.isPrototypeOf( value ) ) {
-            return value.get( container );
+            return value.get( container, requestId );
         } else if ( value === Inject
                 ||   value === Inject.all
                 ||   value === Inject.lazily
                 ||   value === Inject.all.lazily) {
             Asserts.assertNotNull( name, "name" );
-            return value(name).get( container );
+            return value(name).get( container, requestId );
         } else {
             return Deferred.valueOf( value );
         }
     };
     
     /** @private */
-    Binding.prototype.resolveProperties = function( collection, container, valueKey ) {
+    Binding.prototype.resolveProperties = function( collection, container, valueKey, requestId ) {
         var deferreds = [];
         if ( !collection ) return Deferred.valueOf(collection);
         if ( collection.forEach ) {
             collection.forEach( function ( value ){
-                deferreds.push( this.resolveProperty( value, container ));
+                deferreds.push( this.resolveProperty( value, container, requestId ));
             });
             return Deferred.wait( deferreds );
         } else {
@@ -181,7 +182,7 @@ define( [
                 }
                 keys.push(i);
                 var value = valueKey ? collection[i][valueKey] : collection[i];
-                deferreds.push( this.resolveProperty( value, container, i ));
+                deferreds.push( this.resolveProperty( value, container, i, requestId ));
             }
             return Deferred.when( deferreds ).pipe( function( array ){
                 var tmp = {};

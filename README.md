@@ -40,6 +40,7 @@ In addition, we use the following testing framework.
 - IE9+
 - GoogleChrome
 - Firefox4+
+- IE7,8 with es5-shim ( https://github.com/kriskowal/es5-shim )
 
 # Getting Started
 
@@ -128,14 +129,13 @@ scripts/app/main.js:
             binder.bind("app.Model");
             
         });
-        
-        window.addEventListener("load", function() {
+        container.onEagerSingletonConponentsInitialized.then(function() {
             container.get("app.Model").then(function( model ){
                 model.initialize();
             }, function( error ) {
                 alert( error.toString() ); 
             });
-        }, false);
+        });
         
     });
 
@@ -414,6 +414,9 @@ Configuration change is done in the `inScope()` .
         binder.bind("Foo").inScope( ContainerJS.Scope.SINGLETON ); // default
         binder.bind("Bar").inScope( ContainerJS.Scope.EAGER_SINGLETON );
         binder.bind("Val").inScope( ContainerJS.Scope.PROTOTYPE );
+    });
+    container.onEagerSingletonConponentsInitialized.then(function(){
+        // called when all eager singleton conponents are initialized.
     });
 
 ## Injection

@@ -1,4 +1,9 @@
 
-
+* 2013-08-12 version 1.0.1
+  * fix cyclic dependency checking problem.
+  * supports latest version of require.js (2.1.8).
+  * updates dependant modules and tools. (r.js/rhino/Closure Compiler)
+  * refactoring specs.
+  
 * 2012-08-20 version 1.0.0
   * first release.

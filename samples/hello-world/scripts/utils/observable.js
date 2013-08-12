@@ -21,7 +21,7 @@ define( function(){
     Observable.prototype.addObserver = function(
             eventId, observerFunction ) {
         var observers = this.observers[eventId] 
-                            || (this.observers[eventId] = []);
+                    || (this.observers[eventId] = []);
         observers.push(observerFunction);
     };
     

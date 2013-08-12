@@ -28,8 +28,10 @@ ContainerJSは、JavaScriptアプリケーション用の Dipendency Injection �
 - IE9+
 - GoogleChrome
 - Firefox4+
+- IE7,8( with es5-shim )
 
 ※ECMAScript5の機能を使用しています。
+※es5-shim (https://github.com/kriskowal/es5-shim) と組み合わせるとIE7,8でも動作します。
 
 # 依存モジュール
 
@@ -132,13 +134,13 @@ scripts/app/main.js:
             
         });
         
-        window.addEventListener("load", function() {
+        container.onEagerSingletonConponentsInitialized.then( function() {
             container.get("app.Model").then(function( model ){
                 model.initialize();
             }, function( error ) {
                 alert( error.toString() ); 
             });
-        }, false);
+        });
         
     });
 
@@ -408,6 +410,7 @@ main.js:
 - **EagerSingleton**
     - Singletonと同じく唯一のインスタンスを返しますが、インスタンスがコンテナの作成時に生成されます。(Singletonの場合、コンテナから初めてコンポーネントを取得した際に生成されます。)
     - これを使うと、コンテナに登録しておくだけで効果を発揮するコンポーネントを作成できます。
+    - container.onEagerSingletonConponentsInitialized の Deferred でEagerSingletonコンポーネントの生成完了を捕捉できます。
 - **Prototype**
     - コンポーネント取得のたびに、コンポーネントを再作成します。
 
@@ -417,6 +420,9 @@ main.js:
         binder.bind("Foo").inScope( ContainerJS.Scope.SINGLETON ); // default
         binder.bind("Bar").inScope( ContainerJS.Scope.EAGER_SINGLETON );
         binder.bind("Val").inScope( ContainerJS.Scope.PROTOTYPE );
+    });
+    container.onEagerSingletonConponentsInitialized.then(function(){
+        // called when all eager singleton conponents are initialized.
     });
 
 ## Injection

@@ -1,12 +1,18 @@
 
-load(environment["envjs.home"]+"/dist/env.rhino.js");
 load("../tools/r.js");
 load("../lib/require.js");
+load(environment["envjs.home"]+"/dist/env.rhino.js");
 load(environment["config"] || "config.js");
+
+console = {};
+console.log = function(str) {
+  print(str);
+};
 
 var consoleReporter = null;
 require(["jasmine/jasmine"], function() {
-    require(["jasmine/jasmine-html","larrymyers-jasmine-reporters/jasmine.console_reporter"], function() {
+    require(["jasmine/jasmine-html",
+             "larrymyers-jasmine-reporters/jasmine.console_reporter"], function() {
         require(["test/all-specs"], function() {
             consoleReporter = new jasmine.ConsoleReporter();
             jasmine.getEnv().addReporter( consoleReporter );

@@ -28,8 +28,8 @@ define( [
     InstanceBinding.prototype = Object.create( Binding.prototype );
     
     /** @override */
-    InstanceBinding.prototype.getInstance = function( container ) {
-        return this.injectProperties( this.instance, container );
+    InstanceBinding.prototype.getInstance = function( container, requestId ) {
+        return this.injectProperties( this.instance, container, requestId );
     };
     
     

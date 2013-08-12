@@ -28,8 +28,11 @@ define( [
     Key.create = function( name, all, lazily ) {
         return Object.freeze( Object.create( Key, {
             get : { 
-                value : function( container ) {
-                    var d = all ? container.gets( name ) : container.get( name );
+                value : function( container, requestId ) {
+                    requestId = lazily ? null : requestId;
+                    var d = all 
+                        ? container.gets( name, requestId ) 
+                        : container.get(  name, requestId );
                     if ( lazily ) {
                         return Deferred.valueOf( d );
                     } else {

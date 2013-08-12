@@ -28,7 +28,7 @@ require([
         
     });
     
-    window.addEventListener("load", function() {
+    container.onEagerSingletonConponentsInitialized.then(function() {
         
         container.get("app.Class").then(function( component ){
             print( "<br/>--- app.Class" );
@@ -69,6 +69,6 @@ require([
             alert( error.toString() ); 
         });
         
-    }, false);
+    });
     
 });

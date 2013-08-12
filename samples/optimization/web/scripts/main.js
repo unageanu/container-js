@@ -17,7 +17,7 @@ require(["container"], function( ContainerJS ) {
         binder.bind("app.model.BModel");
     });
     
-    window.addEventListener("load", function() {
+    container.onEagerSingletonConponentsInitialized.then( function() {
         
         document.getElementById("linkA").addEventListener( "click", function(){
             container.get("app.A").then(function( a ){
@@ -33,6 +33,6 @@ require(["container"], function( ContainerJS ) {
                 alert( error.toString() ); 
             });
         });
-    }, false);
+    });
     
 });

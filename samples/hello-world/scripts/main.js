@@ -16,13 +16,12 @@ require(["container"], function( ContainerJS ) {
         binder.bind("app.Model");
         
     });
-    
-    window.addEventListener("load", function() {
+    container.onEagerSingletonConponentsInitialized.then(function() {
         container.get("app.Model").then(function( model ){
             model.initialize();
         }, function( error ) {
             alert( error.toString() ); 
         });
-    }, false);
+    });
     
 });

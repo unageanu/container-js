@@ -39,13 +39,13 @@ define( [
     ConstructorBinding.prototype = Object.create( ModuleBinding.prototype );
     
     /** @override */
-    ConstructorBinding.prototype.getInstance = function( container ) {
+    ConstructorBinding.prototype.getInstance = function( container, requestId ) {
         var d = new Deferred();
         var errorback = function( error ){ d.reject(error); };
         this.load(container.loader).then( function( constructor ) {
-            this.resolveProperties(this.constructorArgument, container).then( function(constructorArgument){
+            this.resolveProperties(this.constructorArgument, container, null, requestId).then( function(constructorArgument){
                 var component = new constructor( constructorArgument );
-                this.injectProperties( component, container ).then( function( ){
+                this.injectProperties( component, container, requestId ).then( function( ){
                     d.resolve(component);
                 }, errorback ).fail( errorback );
             }.bind( this ), errorback).fail( errorback );

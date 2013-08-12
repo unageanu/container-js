@@ -15,7 +15,7 @@ require(["container"], function( ContainerJS ) {
         binder.bind("app.Owner");
     });
     
-    window.addEventListener("load", function() {
+    container.onEagerSingletonConponentsInitialized.then(function() {
         
         container.get("app.Owner").then(function( owner ){
             document.getElementById("link").addEventListener( "click", function(){
@@ -25,6 +25,6 @@ require(["container"], function( ContainerJS ) {
             alert( error.toString() ); 
         });
         
-    }, false);
+    });
     
 });

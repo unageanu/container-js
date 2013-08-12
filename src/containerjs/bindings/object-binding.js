@@ -33,11 +33,11 @@ define( [
     ObjectBinding.prototype = Object.create( ModuleBinding.prototype );
     
     /** @override */
-    ObjectBinding.prototype.getInstance = function( container ) {
+    ObjectBinding.prototype.getInstance = function( container, requestId ) {
         var d = new Deferred();
         var errorback = function( error ){ d.reject(error); }
         this.load(container.loader).then( function( component ) {
-            this.injectProperties( component, container ).then( function( ){
+            this.injectProperties( component, container, requestId ).then( function( ){
                 d.resolve(component);
             }, errorback ).fail( errorback );
         }.bind( this ), errorback).fail( errorback );

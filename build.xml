@@ -5,11 +5,11 @@
     
     <property name="test.dir" value="test" />
     
-    <property name="rhino.home" value="./tools/rhino1_7R3" />
+    <property name="rhino.home" value="./tools/rhino1_7R4" />
     <property name="jasmine.home" value="./lib-test/jasmine-1.0.2" />
     <property name="jasmine-reporters.home" value="./lib-test/larrymyers-jasmine-reporters-adf6227" />
     <property name="envjs.home" value="./lib-test/thatcher-env-js-cb738b9" />
-    <property name="closure-compiler.home" value="./tools/compiler-20120710" />
+    <property name="closure-compiler.home" value="./tools/compiler-20130603" />
   
     <target name="clean">
         <delete dir="./minified" />
@@ -18,14 +18,14 @@
 
     <target name="test">
         <java jar="${rhino.home}/js.jar" fork='true' dir="test">
-            <arg line="-opt -1 cui.js"/>
+            <arg line="-encoding utf-8 -opt -1 cui.js"/>
             <sysproperty key="envjs.home" value="../${envjs.home}"/>
         </java>
     </target>
     
     <target name="test.minified.module">
         <java jar="${rhino.home}/js.jar" fork='true' dir="test">
-            <arg line="-opt -1 cui.js"/>
+            <arg line="-encoding utf-8 -opt -1 cui.js"/>
             <sysproperty key="envjs.home" value="../${envjs.home}"/>
             <sysproperty key="config" value="config-for-minified-module.js"/>
         </java>
@@ -38,7 +38,7 @@
                 <path path="${closure-compiler.home}/compiler.jar" />
             </classpath>
             <jvmarg line="-Xss1m"/>
-            <arg line="tools/r.js -o name=container out=minified/container.js baseUrl=src optimize=closure"/>
+            <arg line="-encoding utf-8 tools/r.js -o name=container out=minified/container.js baseUrl=src optimize=closure"/>
         </java>
     </target>
     

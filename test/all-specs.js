@@ -4,5 +4,13 @@ define([
     "test/specs/utils/deferred",
     "test/specs/bindings",
     "test/specs/aspect",
-    "test/specs/container"
+    "test/specs/containerjs/binding",
+    "test/specs/containerjs/chaining",
+    "test/specs/containerjs/initializer-and-destructor",
+    "test/specs/containerjs/injection",
+    "test/specs/containerjs/interception",
+    "test/specs/containerjs/multi-binding",
+    "test/specs/containerjs/naming",
+    "test/specs/containerjs/packaging-policy",
+    "test/specs/containerjs/scope"
 ]);
