@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jasmine Test Runner</title>
+    <link rel="stylesheet" type="text/css" href="../../../lib-test/jasmine-1.0.2/jasmine.css">
+    <script type="text/javascript" src="../../../lib/require.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      require(["jasmine/jasmine"], function() {
+            require(["jasmine/jasmine-html","larrymyers-jasmine-reporters/jasmine.console_reporter"], function() {
+              require(["test/all-specs"], function() {
+                  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+                  jasmine.getEnv().execute();
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

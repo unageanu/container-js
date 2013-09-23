@@ -1,0 +1,23 @@
+({
+    appDir: "../src",
+    baseUrl: "./js",
+    paths: {
+        "container" : "../../../../minified/container",
+        "knockout"  : "knockout-2.3.0"
+    },
+
+    dir: "../dst",
+    optimize: "closure",
+
+    closure: {
+        CompilerOptions: {},
+        CompilationLevel: 'SIMPLE_OPTIMIZATIONS',
+        loggingLevel: 'WARNING'
+    },
+
+    optimizeCss: "standard.keepLines",
+
+    modules: [{
+        name: "main"
+    }]
+})

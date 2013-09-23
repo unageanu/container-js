@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo List</title>
+    <script type="text/javascript"
+            data-main="../js/main.js" 
+            src="../../../../lib/require.js">
+    </script>
+    <link rel="stylesheet" type="text/css" href="../css/todo-list.css">
+  </head>
+  <body>
+    <div class="todo-input-form">
+      title: <input type="text" data-bind="value:todoInputForm.title" class="title-field"></input>
+      <button data-bind="click:newTodo" class="add-button">
+        add
+      </button>
+      <div class="error" data-bind="text:todoInputForm.error"></div>
+    </div >
+    <div class="todo-list" data-bind="foreach:items, visible:true" style="display:none;">
+      <div class="todo">
+        <img src="../images/normal.png" alt="" data-bind="visible:!completed()" />
+        <img src="../images/check.png" alt="checked" data-bind="visible:completed" />
+        <span class="title" data-bind="text:title"></span>
+        <span class="last-modified" data-bind="text:lastModifiedForDisplay"></span>
+        <span class="commands">
+          <a href="javascript:void(0)" data-bind="click:activate, visible: completed()">
+            activate
+          </a>
+          <a href="javascript:void(0)" data-bind="click:complete, visible: !completed()">
+            complete
+          </a>
+          <a href="javascript:void(0)" data-bind="click:remove">remove</a>
+        </span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button data-bind="click: removeCompleted, enable:enableToRemoveCompleted">
+         remove completed
+      </button>
+    </div>
+  </body>
+</html>
