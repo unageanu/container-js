@@ -399,6 +399,13 @@ main.js:
             .assign(ContainerJS.PackagingPolicy.SINGLE_FILE);
     });
 
+Packaging Policy はコンポーネント定義の中で指定するほか、デフォルトの設定をコンテナのコンストラクタで指定することもできます。
+
+    var container = new ContainerJS.Container( function( binder ){
+        binder.bind("app.foo.HogeHoge");
+        binder.bind("app.foo.FugaFuga");
+    }, ContainerJS.PackagingPolicy.SINGLE_FILE); // デフォルトの設定をコンストラクタで指定
+
 ## Scope
 
 「Singleton」,「EagerSingleton」,「Prototype」をサポートします。デフォルトは「Singleton」です。

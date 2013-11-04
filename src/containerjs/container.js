@@ -11,8 +11,9 @@ define([
      * @class container.Container
      * @constructor
      * @param {function(container.Binder):void} module 
+     * @param {container.PackagingPolicy?} defaultPackagingPolicy
      */
-    var Container = function Container ( module ) {
+    var Container = function Container ( module, defaultPackagingPolicy ) {
         
         /** @type {Object.<string, Array.<container.Binding.<*>>>} */
         this.bindings;
@@ -24,10 +25,10 @@ define([
         this.singletonComponents = {};
         /** @type {container.Container} */
         this.chainedContainer = null;
-        
+
         this.createRequestSerial = 1;
         
-        this.load(module, this);
+        this.load(module, defaultPackagingPolicy);
         this.loader = loader;
         this.onEagerSingletonConponentsInitialized =
             this.createEagerSingletonConponents(this);
@@ -195,8 +196,8 @@ define([
     };
     
     /** @private */
-    prototype.load = function( module ) {
-        var binder = new Binder();
+    prototype.load = function( module, defaultPackagingPolicy ) {
+        var binder = new Binder(defaultPackagingPolicy);
         module.call( null, binder );
         this.bindings = binder.buildBindings();
         this.aspects = binder.buildAspects();

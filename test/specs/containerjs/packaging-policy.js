@@ -131,6 +131,20 @@ define([
                     }).toThrow( new Error("componenet 'test.modules.package2.NotFound' is not found in module 'test/modules/package2'.") );
                 });
             });
+            
+            it( "can configure the packaging policy by a second argument for the constructor of container.", function() {
+                var container = new ContainerJS.Container( function( binder ){
+                    binder.bind( "test.modules.package1.A" );
+                }, ContainerJS.PackagingPolicy.MODULE_PER_PACKAGE);
+                
+                var deferred = container.get( "test.modules.package1.A" );
+                Wait.forFix(deferred);
+                
+                runs( function(){
+                    var component = ContainerJS.utils.Deferred.unpack( deferred );
+                    expect( component.type ).toBe( "test.modules.package1.A" );
+                });
+            });
         });
     });
 });

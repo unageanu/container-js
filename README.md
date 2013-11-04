@@ -394,6 +394,13 @@ main.js:
             .assign(ContainerJS.PackagingPolicy.SINGLE_FILE);
     });
 
+In addition to be specified in the component definition, The default packaging policy can also be specified in the constructor arguments of the container.
+
+    var container = new ContainerJS.Container( function( binder ){
+        binder.bind("app.foo.HogeHoge");
+        binder.bind("app.foo.FugaFuga");
+    }, ContainerJS.PackagingPolicy.SINGLE_FILE); // specified the default settings by the constructor arguments.
+
 ## Scope
 
 Supports the "Singleton", "EagerSingleton", "Prototype".  the "Singleton" is the default.

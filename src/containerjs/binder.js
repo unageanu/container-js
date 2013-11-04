@@ -13,11 +13,13 @@ define( [
     
     /**
      * @class
+     * @param {container.PackagingPolicy} defaultPackagingPolicy
      */
-    var Binder = function () {
+    var Binder = function (defaultPackagingPolicy) {
         this.bindings = {};
         this.aspects = [];
-        this.defaultPackagingPolicy = PackagingPolicy.DEFAULT;
+        this.defaultPackagingPolicy = 
+            defaultPackagingPolicy || PackagingPolicy.DEFAULT;
         
         Object.freeze(this);
     };
