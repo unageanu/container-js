@@ -52,63 +52,58 @@ define([
                 });
             });
             
-            it( "can apply interceptors to a component.", function() {
+            it( "can apply interceptors to a component.", function(done) {
                 var deferred = container.get( "A" );
-                Wait.forFix(deferred);
-                
-                runs( function(){
+                Wait.forFix(deferred, function(){
                     var component = ContainerJS.utils.Deferred.unpack( deferred );
                     expect( component.methodA("!") ).toBe( "a_!_2_1" ); 
                     expect( component.methodB("!") ).toBe( "b_!_1" );
                     expect( component.methodC("!") ).toBe( "c_!_2_1" );
+                    done();
                 }); 
             });
             
-            it( "can apply interceptors to a component that binds as prototype.", function() {
+            it( "can apply interceptors to a component that binds as prototype.", function(done) {
                 var deferred = container.get( "B" );
-                Wait.forFix(deferred);
-                
-                runs( function(){
+                Wait.forFix(deferred, function(){
                     var component = ContainerJS.utils.Deferred.unpack( deferred );
                     expect( component.methodA("!") ).toBe( "a_!_2_1" ); 
                     expect( component.methodB("!") ).toBe( "b_!_1" );
                     expect( component.methodC("!") ).toBe( "c_!_2_1" );
+                    done();
                 }); 
             });
             
-            it( "can apply interceptors to a component that binds as object.", function() {
+            it( "can apply interceptors to a component that binds as object.", function(done) {
                 var deferred = container.get( "C" );
-                Wait.forFix(deferred);
-                
-                runs( function(){
+                Wait.forFix(deferred, function(){
                     var component = ContainerJS.utils.Deferred.unpack( deferred );
                     expect( component.methodA("!") ).toBe( "a_!_2_1" ); 
                     expect( component.methodB("!") ).toBe( "b_!_1" );
                     expect( component.methodC("!") ).toBe( "c_!_2_1" );
+                    done();
                 }); 
             });
             
-            it( "can apply interceptors to a component that provides from the provider.", function() {
+            it( "can apply interceptors to a component that provides from the provider.", function(done) {
                 var deferred = container.get( "D" );
-                Wait.forFix(deferred);
-                
-                runs( function(){
+                Wait.forFix(deferred, function(){
                     var component = ContainerJS.utils.Deferred.unpack( deferred );
                     expect( component.methodA("!") ).toBe( "a_!_2_1" ); 
                     expect( component.methodB("!") ).toBe( "b_!_1" );
                     expect( component.methodC("!") ).toBe( "c_!_2_1" );
+                    done();
                 }); 
             });
             
-            it( "can apply interceptors to a component that binds as instance.", function() {
+            it( "can apply interceptors to a component that binds as instance.", function(done) {
                 var deferred = container.get( "E" );
-                Wait.forFix(deferred);
-                
-                runs( function(){
+                Wait.forFix(deferred, function(){
                     var component = ContainerJS.utils.Deferred.unpack( deferred );
                     expect( component.methodA("!") ).toBe( "a_!_2_1" ); 
                     expect( component.methodB("!") ).toBe( "b_!_1" );
                     expect( component.methodC("!") ).toBe( "c_!_2_1" ); 
+                    done();
                 }); 
             });
         });

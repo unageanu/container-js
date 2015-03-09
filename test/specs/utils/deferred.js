@@ -98,13 +98,13 @@ define(["containerjs/utils/deferred"], function(Deferred) {
             it( "'resolve' raises an error.", function() {
                 expect(function(){
                     deferred.resolve("result");
-                }).toThrow( {message:"already resolved or rejected."} );
+                }).toThrow( new Error("already resolved or rejected.") );
             });
             
             it( "'reject' raises an error.", function() {
                 expect(function(){
                     deferred.reject("error");
-                }).toThrow( {message:"already resolved or rejected."} );
+                }).toThrow( new Error("already resolved or rejected."));
             });
            
             it( "'fixed' returns true.", function() {
@@ -163,13 +163,13 @@ define(["containerjs/utils/deferred"], function(Deferred) {
             it( "'resolve' raises an error.", function() {
                 expect(function(){
                     deferred.resolve("result");
-                }).toThrow( {message:"already resolved or rejected."} );
+                }).toThrow( new Error("already resolved or rejected.") );
             });
             
             it( "'reject' raises an error.", function() {
                 expect(function(){
                     deferred.reject("error");
-                }).toThrow( {message:"already resolved or rejected."} );
+                }).toThrow( new Error("already resolved or rejected.") );
             });
             
             it( "'fixed' returns true.", function() {

@@ -11,7 +11,7 @@ define([
         }
     };
     beforeEach(function() {
-        this.addMatchers(Matchers);
+        jasmine.addMatchers(Matchers);
     });
     
     describe('PackagingPolicy.MODULE_PER_PACKAGE', function() {

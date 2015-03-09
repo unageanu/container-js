@@ -4,20 +4,29 @@ define( [
     
     return Object.freeze({
         
-        toResolveWith: function(expected) {
-            return this.env.equals_( 
-                Deferred.unpack(this.actual), expected );
+        toResolveWith: function(util) {
+            return {
+                compare: function(actual, expected) {
+                    var result = util.equals( 
+                        Deferred.unpack(actual), expected );
+                    return {pass:result};
+                }
+            };
         },
         
-        toRejectWith: function(expected) {
-            try {
-                var result = Deferred.unpack(this.actual);
-                throw new Error('the posmise resolved with ' + String(result));
-            } catch ( error ) {
-                return this.env.equals_(error.message || error, expected.message || expected);
-            }
+        toRejectWith: function(util) {
+            return {
+                compare: function(actual, expected) {
+                    try {
+                        var result = Deferred.unpack(actual);
+                        throw new Error('the posmise resolved with ' + String(result));
+                    } catch ( error ) {
+                        var result = util.equals(error.message || error, expected.message || expected);
+                        return {pass:result};
+                    }
+                }
+            };
         }
-        
     });
 });
 

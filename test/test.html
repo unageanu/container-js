@@ -3,20 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Jasmine Test Runner</title>
-    <link rel="stylesheet" type="text/css" href="../lib-test/jasmine-1.0.2/jasmine.css">
-    <script type="text/javascript" src="../lib/require.js"></script>
+    <link rel="shortcut icon" type="image/png" href="../node_modules/jasmine-core/lib/images/jasmine_favicon.png">
+    <link rel="stylesheet" href="../node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+    
+    <script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
     <script type="text/javascript" src="config.js"></script>
-  </head>
-  <body>
+
     <script type="text/javascript">
       require(["jasmine/jasmine"], function() {
-            require(["jasmine/jasmine-html","larrymyers-jasmine-reporters/jasmine.console_reporter"], function() {
+            require(["jasmine/jasmine-html", "jasmine/boot"], function() {
               require(["test/all-specs"], function() {
-                  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-                  jasmine.getEnv().execute();
+                  window.onload();
               });
           });
       });
     </script>
+  </head>
+  <body>
   </body>
 </html>

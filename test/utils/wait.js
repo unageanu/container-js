@@ -1,11 +1,19 @@
 define(function( ) {
     
     return Object.freeze({
-        forFix : function( deferred ) {
+        forFix : function( deferred, f ) {
             deferred.then( function(){} );
-            waitsFor(function() {
-                return deferred.fixed();
-            }, null, 2000);
+            
+            var timeout = function() {
+                if ( deferred.fixed() ) {
+                    f();
+                } else {
+                    setTimeout(function() {
+                        timeout()
+                    }, 200);
+                }
+            };
+            timeout();
         }
     });
 });
