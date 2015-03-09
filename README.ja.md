@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/unageanu/container-js.svg?branch=master)](https://travis-ci.org/unageanu/container-js)
+
 # 概要
 
 ContainerJSは、JavaScriptアプリケーション用の Dipendency Injection コンテナです。

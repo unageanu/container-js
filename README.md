@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/unageanu/container-js.svg?branch=master)](https://travis-ci.org/unageanu/container-js)
+
 # About
 
 ContainerJS is a Dependency Injection Container for JavaScript Application.
