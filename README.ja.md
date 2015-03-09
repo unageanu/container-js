@@ -210,7 +210,7 @@ app/class.js:
 コンポーネント定義:
 
     var container = new ContainerJS.Container( function( binder ){
-        binder.bind("app.Prototype").asProrotype();
+        binder.bind("app.Prototype").asPrototype();
         binder.bind("anotherName").toPrototype("app.Prototype", {
            foo : { value: "foo" } // 第2引数でObject#create()に渡す引数を指定できます
         });

@@ -205,7 +205,7 @@ app/class.js:
 Component Definition:
 
     var container = new ContainerJS.Container( function( binder ){
-        binder.bind("app.Prototype").asProrotype();
+        binder.bind("app.Prototype").asPrototype();
         binder.bind("anotherName").toPrototype("app.Prototype", {
            foo : { value: "foo" } // You can specify the arguments to be passed to `Object#Create()` in the second argument.
         });

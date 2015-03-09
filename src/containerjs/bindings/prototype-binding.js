@@ -20,7 +20,7 @@ define( [
      */
     var PrototypeBinding = function( arg ){ 
         
-        Asserts.assertNotNull(arg.prototype, "prorotype");
+        Asserts.assertNotNull(arg.prototype, "prototype");
         
         Binding.call( this, arg );
         ModuleBinding.call( this, arg );
