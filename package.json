@@ -17,6 +17,9 @@
     "jasmine-core": "^2.2.0",
     "rimraf": "^2.3.1"
   },
+  "engines": {
+    "node": "0.12.x"
+  },
   "scripts": {
     "build": "gulp",
     "test" : "gulp test"
