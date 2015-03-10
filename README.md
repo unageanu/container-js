@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/unageanu/container-js.svg?branch=master)](https://travis-ci.org/unageanu/container-js)
+[![Code Climate](https://codeclimate.com/github/unageanu/container-js/badges/gpa.svg)](https://codeclimate.com/github/unageanu/container-js)
 
 # About
 
