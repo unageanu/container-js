@@ -44,9 +44,6 @@ ContainerJSは以下のモジュールに依存しています。
 また、以下のテスティングフレームワークを使用しています。
 
 - [jasmine](https://github.com/pivotal/jasmine/) ( [MIT License](https://github.com/pivotal/jasmine/blob/master/MIT.LICENSE) )
-- [jasmine-reporters](https://github.com/larrymyers/jasmine-reporters) ( [MIT License](https://github.com/larrymyers/jasmine-reporters/blob/master/LICENSE) )
-- [Rhino](https://developer.mozilla.org/en-US/docs/Rhino) ( [MPL 2.0 License](https://developer.mozilla.org/en-US/docs/Rhino/License) )
-- [env-js](http://www.envjs.com/)
 
 # Getting started
 
