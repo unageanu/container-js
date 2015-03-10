@@ -71,8 +71,8 @@ define( function(){
     /** @override */
     Deferred.prototype.then = function( successCallback, failCallback ){
         var d = new Deferred();
-        this.state.done.call(this,successCallback,d);
-        this.state.fail.call(this,failCallback,d);
+        this.state.done.call(this, successCallback, d);
+        this.state.fail.call(this, failCallback, d);
         return d;
     };
     /** @override */
@@ -82,13 +82,13 @@ define( function(){
     /** @override */
     Deferred.prototype.done = function( successCallback ){
         var d = new Deferred();
-        this.state.done.call(this,successCallback,d);
+        this.state.done.call(this, successCallback, d);
         return d;
     };
     /** @override */
     Deferred.prototype.fail = function( failCallback ){
         var d = new Deferred();
-        this.state.fail.call(this,failCallback,d);
+        this.state.fail.call(this, failCallback, d);
         return d;
     };
     /**
@@ -96,7 +96,7 @@ define( function(){
      * @return {Deferred.<V,E>} this 
      */
     Deferred.prototype.resolve = function( result ){
-        this.state.resolve.call(this,result);
+        this.state.resolve.call(this, result);
         return this;
     };
     /**
@@ -104,13 +104,13 @@ define( function(){
      * @return {Deferred.<V,E>} this 
      */
     Deferred.prototype.reject = function( error ){
-        this.state.reject.call(this,error);
+        this.state.reject.call(this, error);
         return this;
     };
     
     /** @override */
     Deferred.prototype.fixed = function(){
-        return this.rejected() || this.resolved() ;
+        return this.rejected() || this.resolved();
     };
     /** @override */
     Deferred.prototype.rejected = function(){
@@ -308,7 +308,7 @@ define( function(){
     };
     
     /** @private */
-    var alreadyFixed =  function() {
+    var alreadyFixed = function() {
         throw new Error("already resolved or rejected.");
     };
     /** @private */
@@ -317,8 +317,8 @@ define( function(){
     };
     /** @private */
     var notifyAll = function( callbacks, result ){
-        var i,n;
-        for ( i=0,n=callbacks.length;i<n;i++ ) {
+        var i, n;
+        for ( i=0, n=callbacks.length; i<n; i++ ) {
             notify( callbacks[i], result );
         }
     };
@@ -337,11 +337,11 @@ define( function(){
     var states = {
         unresolved : {
             done : function( successCallback, deferred ) {
-                this.successCallbacks.push( chain ( successCallback, deferred ) );
+                this.successCallbacks.push( chain( successCallback, deferred ) );
                 return deferred;
             },
             fail : function( failCallback, deferred ) {
-                this.failCallbacks.push( chain ( failCallback, deferred ) );
+                this.failCallbacks.push( chain( failCallback, deferred ) );
                 return deferred;
             },
             resolve : function( result ){

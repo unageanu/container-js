@@ -68,7 +68,7 @@ define([
         };
     }()));
     
-    policies.MODULE_PER_CLASS = Object.freeze( Object.create( PackagingPolicy,{
+    policies.MODULE_PER_CLASS = Object.freeze( Object.create( PackagingPolicy, {
         /** @private */
         resolveModuleFor : {
             value : function( componentName ) {
@@ -95,7 +95,7 @@ define([
             value : function( module, componentName ) {
                 var steps = componentName.split(".");
                 var m = module;
-                for ( var i=1;i<steps.length && m ;i++ ) {
+                for ( var i=1; i<steps.length && m; i++ ) {
                     m = m[steps[i]];
                 }
                 return m;
@@ -112,7 +112,7 @@ define([
                     .toLowerCase();
     };
     /** @private */
-    var notFound = function(componentName,moduleName) {
+    var notFound = function(componentName, moduleName) {
         throw new Error("componenet '"+ componentName + 
                 "' is not found in module '" + moduleName + "'.");
     };

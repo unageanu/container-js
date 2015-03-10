@@ -62,7 +62,7 @@ define( function(){
         } else {
             return component;
         }
-    }
+    };
     
     /** @private */
     prototype.collectAndCreateEnhancedMethod = function( 
@@ -71,7 +71,7 @@ define( function(){
                 binding, component, prototypeObject, enhancedMethods );
         return this.collectFromNonEnumerableProperties(
                 binding, component, prototypeObject, enhancedMethods ) || enhanced;
-    }
+    };
     
     /** @private */
     prototype.collectFromEnumerableProperties = function( 
@@ -82,7 +82,7 @@ define( function(){
                     binding, component, enhancedMethods, name) || enhanced;
         }
         return enhanced;
-    }
+    };
     
     /** @private */
     prototype.collectFromNonEnumerableProperties = function( 
@@ -101,14 +101,14 @@ define( function(){
                     binding, component, proto, enhancedMethods) || enhanced;
         }
         return enhanced;
-    }
+    };
     
     /** @private */
     prototype.checkAndCreateEnhancedMethod = function( 
             binding, component, enhancedMethods, name ) {
         if (typeof component[name] !== "function"
          || (this.matcher && !this.matcher( binding, component, name))) {
-            return;
+            return false;
         }
         var method = component[name];
         if ( this.isEnhancedMethod(method) ) {
@@ -123,7 +123,7 @@ define( function(){
                 this.createEnhancedMethod(component, name);
             return true;
         }
-    }
+    };
     
     /** @private */
     prototype.createEnhancedMethod = function( component, name ) {
@@ -151,15 +151,15 @@ define( function(){
         return {
             value : enhancedMethod
         };
-    }
+    };
     /** @private */
     prototype.isEnhancedMethod = function( method ) {
         return !!method[KEY];
-    }
+    };
     /** @private */
     prototype.isEnhancedObject = function( obj ) {
         return !!obj[ENHANCED_FLAG];
-    }
+    };
     /** @private */
     var KEY = "$ContainerJS.interceptors";
     /** @private */

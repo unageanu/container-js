@@ -39,7 +39,7 @@ define( [
             index : { value : bindings.length }
         }));
         reference.set( bindingFactory.createConstructorBinding({
-            name : name ,
+            name : name,
             constructor : name,
             packagingPolicy : this.defaultPackagingPolicy
         }));
@@ -68,13 +68,13 @@ define( [
     
     /** @private */
     prototype.buildBindings = function( ){
-        var j,i,n;
+        var j, i, n;
         for ( i in this.bindings ) {
             if ( !this.bindings.hasOwnProperty(i) ) { 
                 continue; 
             }
             var array = this.bindings[i];
-            for ( j=0,n=array.length;j<n;j++ ) {
+            for ( j=0, n=array.length; j<n; j++ ) {
                 Object.freeze( array[j] );
             }
         }

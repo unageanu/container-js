@@ -33,7 +33,7 @@ define( [
         /**
          * @type {Object.<string, {value : container.bindings.Value}>}
          */
-        this.prototypeProperties =  arg.prototypeProperties || undefined;
+        this.prototypeProperties = arg.prototypeProperties || undefined;
         
     };
     PrototypeBinding.prototype = Object.create( ModuleBinding.prototype );

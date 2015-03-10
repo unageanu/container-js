@@ -6,8 +6,8 @@ define([
     
     var retrievingStrategies = {
         forSingleton : function( container, binding, parentId ) {
-            return  container.singletonComponents[binding.id]
-                 || (container.singletonComponents[binding.id]
+            return container.singletonComponents[binding.id]
+                || (container.singletonComponents[binding.id]
                        = container.createComponent(binding, parentId));
         },
         forPrototype : function( container, binding, parentId ) {

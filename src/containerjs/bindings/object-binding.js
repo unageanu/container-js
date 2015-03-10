@@ -35,7 +35,7 @@ define( [
     /** @override */
     ObjectBinding.prototype.getInstance = function( container, requestId ) {
         var d = new Deferred();
-        var errorback = function( error ){ d.reject(error); }
+        var errorback = function( error ){ d.reject(error); };
         this.load(container.loader).then( function( component ) {
             this.injectProperties( component, container, requestId ).then( function( ){
                 d.resolve(component);

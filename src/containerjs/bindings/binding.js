@@ -104,7 +104,7 @@ define( [
                 component[i] = values[i];
             }
             return component;
-        }.bind(this));
+        });
     };
     
     /** @private */
@@ -141,9 +141,9 @@ define( [
         if ( value && Key.isPrototypeOf( value ) ) {
             return true;
         } else if ( value === Inject
-                ||   value === Inject.all
-                ||   value === Inject.lazily
-                ||   value === Inject.all.lazily) {
+                 || value === Inject.all
+                 || value === Inject.lazily
+                 || value === Inject.all.lazily) {
             return true;
         } else {
             return false;
@@ -155,9 +155,9 @@ define( [
         if ( value && Key.isPrototypeOf( value ) ) {
             return value.get( container, requestId );
         } else if ( value === Inject
-                ||   value === Inject.all
-                ||   value === Inject.lazily
-                ||   value === Inject.all.lazily) {
+                 || value === Inject.all
+                 || value === Inject.lazily
+                 || value === Inject.all.lazily) {
             Asserts.assertNotNull( name, "name" );
             return value(name).get( container, requestId );
         } else {
@@ -170,8 +170,8 @@ define( [
         var deferreds = [];
         if ( !collection ) return Deferred.valueOf(collection);
         if ( collection.forEach ) {
-            collection.forEach( function ( value ){
-                deferreds.push( this.resolveProperty( value, container, requestId ));
+            collection.forEach( function( val ){
+                deferreds.push( this.resolveProperty( val, container, requestId ));
             });
             return Deferred.wait( deferreds );
         } else {
@@ -186,13 +186,13 @@ define( [
             }
             return Deferred.when( deferreds ).pipe( function( array ){
                 var tmp = {};
-                for ( var i=0;i<keys.length; i++ ) {
-                    var key = keys[i];
+                for ( var j=0; j<keys.length; j++ ) {
+                    var key = keys[j];
                     if ( valueKey ) {
-                        collection[key][valueKey] = array[i];
+                        collection[key][valueKey] = array[j];
                         tmp[key] = collection[key];
                     } else {
-                        tmp[key] = array[i];
+                        tmp[key] = array[j];
                     }
                 }
                 return tmp;

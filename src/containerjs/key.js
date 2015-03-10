@@ -32,7 +32,7 @@ define( [
                     requestId = lazily ? null : requestId;
                     var d = all 
                         ? container.gets( name, requestId ) 
-                        : container.get(  name, requestId );
+                        : container.get( name, requestId );
                     if ( lazily ) {
                         return Deferred.valueOf( d );
                     } else {

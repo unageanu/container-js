@@ -5,6 +5,7 @@ var uglify    = require('gulp-uglify');
 var rjs       = require('gulp-requirejs');
 var requirejs = require('requirejs');
 var Jasmine   = require('jasmine');
+var eslint    = require('gulp-eslint');
 
 gulp.task('default', ['test.minified'])
 
@@ -48,6 +49,13 @@ gulp.task('test.minified', ['minify'], function(done) {
     requirejs("test/all-specs");
     jasmine.execute();
 });
+
+gulp.task('lint', function(cb) {
+    return gulp.src(['src/**/*.js'])
+        .pipe(eslint("./config/eslint.js"))
+        .pipe(eslint.format());
+});
+
 
 var newJasmine = function(done) {
     var jasmine = new Jasmine();

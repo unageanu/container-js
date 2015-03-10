@@ -201,7 +201,7 @@ define([
     };
     
     /** @private */
-    var createHandler  = function(methodNameOrFunction) {
+    var createHandler = function(methodNameOrFunction) {
         if ( typeof methodNameOrFunction === "string" ) {
             return function( component, container ) { 
                 component[methodNameOrFunction](component);
@@ -225,7 +225,7 @@ define([
     /** @private */
     var merge = function() {
         var obj = {};
-        for ( var i=0,n=arguments.length; i<n; i++ ) {
+        for ( var i=0, n=arguments.length; i<n; i++ ) {
             var src = arguments[i];
             for (var j in src) obj[j] = src[j];
         }

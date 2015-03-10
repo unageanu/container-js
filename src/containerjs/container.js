@@ -3,7 +3,7 @@ define([
     "containerjs/binder",
     "containerjs/scope",
     "containerjs/utils/deferred"
-], function( loader, Binder, scope, Deferred  ){
+], function( loader, Binder, scope, Deferred ){
     
     "use strict";
 
@@ -16,9 +16,9 @@ define([
     var Container = function Container ( module, defaultPackagingPolicy ) {
         
         /** @type {Object.<string, Array.<container.Binding.<*>>>} */
-        this.bindings;
+        this.bindings = null;
         /** @type {Array.<container.Aspect>} */
-        this.aspects;
+        this.aspects = null;
         /** @type {Object.<number, {id:Number, name:string, parentId:number>} */
         this.creating = {};
         /** @type {Object.<string,*>} */
@@ -96,11 +96,11 @@ define([
         
         if (this.chainedContainer && this.chainedContainer.hasBindings(name)) {
             var d = new Deferred();
-            var errorback = function(e){ d.reject(e); }
+            var errorback = function(e){ d.reject(e); };
             Deferred.when( deferreds ).then( function(components){
                 this.chainedContainer.gets(name).then(function( parentComponent ){
                     d.resolve(components.concat(parentComponent));
-                }, errorback)
+                }, errorback);
             }.bind(this), errorback);
             return d;
         } else {
@@ -144,10 +144,11 @@ define([
      * @public
      */
     prototype.destroy = function() {
+        var destructor = function(binding){
+            binding.scope.destructionStrategy( this, binding ); 
+        }.bind(this);
         for ( var name in this.bindings ) {
-            this.bindings[name].forEach( function(binding){
-                binding.scope.destructionStrategy( this, binding ); 
-            }.bind(this));
+            this.bindings[name].forEach(destructor);
             delete this.singletonComponents[name];
         }
     };
@@ -171,7 +172,7 @@ define([
                 this.aspects.forEach(function(aspect){
                     component = aspect.weave( binding, component );
                 });
-                binding.initialize(component,this);
+                binding.initialize(component, this);
                 return component;
             } finally {
                 delete this.creating[requestId];
@@ -213,10 +214,11 @@ define([
             }
         }.bind(this);
         var deferreds = [];
+        var notNull = function(x) { 
+            return x != null;
+        };
         for ( var i in this.bindings ) {
-            deferreds = deferreds.concat(this.bindings[i].map(f).filter(function(x) { 
-                return x != null;
-            }));
+            deferreds = deferreds.concat(this.bindings[i].map(f).filter(notNull));
         }
         return Deferred.when(deferreds);
     };
