@@ -14,23 +14,21 @@ define([
             deferred = container.get( "todoListView" );
         });
         
-        it( "first, items is empty .", function() {
+        it( "first, items is empty .", function(done) {
             
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var view = ContainerJS.utils.Deferred.unpack( deferred );
                 view.todoList.load();
                 
                 expect( view.items().length ).toBe( 0 );
+                
+                done();
             });
         });
             
-        it( "can adds a new todo.", function() {
+        it( "can adds a new todo.", function(done) {
             
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var view = ContainerJS.utils.Deferred.unpack( deferred );
                 view.todoList.load();
                 
@@ -45,14 +43,14 @@ define([
                 expect( view.items()[0].title() ).toBe( "test" );
                 expect( view.items()[1].title() ).toBe( "test2" );
                 expect( view.items()[2].title() ).toBe( "test3" );
+                
+                done();
             });
         });
         
-        it( "can removes a todo.", function() {
+        it( "can removes a todo.", function(done) {
             
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var view = ContainerJS.utils.Deferred.unpack( deferred );
                 view.todoList.load();
                 
@@ -73,15 +71,15 @@ define([
                 expect( view.items().length ).toBe( 2 );
                 expect( view.items()[0].title() ).toBe( "test" );
                 expect( view.items()[1].title() ).toBe( "test3" );
+                
+                done();
             });
         });
 
         
-        it( "can removes completed todos.", function() {
+        it( "can removes completed todos.", function(done) {
             
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var view = ContainerJS.utils.Deferred.unpack( deferred );
                 view.todoList.load();
                 
@@ -116,6 +114,8 @@ define([
                 expect( view.enableToRemoveCompleted() ).toBe( true );
                 view.items()[0].activate();
                 expect( view.enableToRemoveCompleted() ).toBe( false );
+                
+                done();
             });
         });
         

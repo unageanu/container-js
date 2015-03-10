@@ -7,13 +7,6 @@
     },
 
     dir: "../dst",
-    optimize: "closure",
-
-    closure: {
-        CompilerOptions: {},
-        CompilationLevel: 'SIMPLE_OPTIMIZATIONS',
-        loggingLevel: 'WARNING'
-    },
 
     optimizeCss: "standard.keepLines",
 

@@ -1,0 +1,33 @@
+{
+  "name": "container-js-todo-list-example",
+  "version": "1.0.0",
+  "description": "container-js todo-list example ",
+  "main": "",
+  "dependencies": {
+    "requirejs": "^2.1.16"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "jasmine": "^2.2.1",
+    "jasmine-core": "^2.2.0",
+    "rimraf": "^2.3.1"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "scripts": {
+    "build": "gulp",
+    "test" : "gulp test"
+  },
+  "author": "masaya yamauchi <masaya.yamauchi@gmail.com>",
+  "licenses": [
+    {
+      "type": "New BSD License",
+      "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unageanu/container-js.git"
+  }
+}

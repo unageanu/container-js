@@ -12,12 +12,10 @@ define([
             container = new ContainerJS.Container( modules );
         });
         
-        it( "'newTodo' can create a new Todo.", function() {
+        it( "'newTodo' can create a new Todo.", function(done) {
             
             var deferred = container.get( "todoInputForm" );
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var form = ContainerJS.utils.Deferred.unpack( deferred );
                 {
                     expect( form.title() ).toBe( "" ); 
@@ -43,15 +41,15 @@ define([
                     expect( form.todoList.items.length ).toBe( 1 ); 
                     expect( form.todoList.items[0].title ).toBe( "test." ); 
                 }
+                
+                done();
             }); 
         });
         
-        it( "'newTodo' fails when the title is invalid.", function() {
+        it( "'newTodo' fails when the title is invalid.", function(done) {
             
             var deferred = container.get( "todoInputForm" );
-            Wait.forFix(deferred);
-            
-            runs( function(){
+            Wait.forFix(deferred, function(){
                 var form = ContainerJS.utils.Deferred.unpack( deferred );
 
                 form.newTodo();
@@ -83,6 +81,8 @@ define([
                     expect( form.todoList.items.length ).toBe( 1 ); 
                     expect( form.todoList.items[0].title ).toBe( createStringOfLength(100) ); 
                 }
+                
+                done();
             }); 
         });
         

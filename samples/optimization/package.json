@@ -1,0 +1,27 @@
+{
+  "name": "container-js-optimization-example",
+  "version": "1.0.0",
+  "description": "container-js optimization example ",
+  "main": "",
+  "dependencies": {
+    "requirejs": "^2.1.16"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "0.12.x"
+  },
+  "scripts": {
+    "build": "node node_modules/requirejs/bin/r.js -o profile.js"
+  },
+  "author": "masaya yamauchi <masaya.yamauchi@gmail.com>",
+  "licenses": [
+    {
+      "type": "New BSD License",
+      "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unageanu/container-js.git"
+  }
+}
