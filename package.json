@@ -1,6 +1,6 @@
 {
   "name": "container-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Dependency Injection Container for JavaScript Web Application.",
   "main": "minified/container.js",
   "directories": {
@@ -40,15 +40,16 @@
     "Lazily module loading"
   ],
   "author": {
-    "name"  : "Masaya Yamauchi",
-    "email" : "masaya.yamauchi@gmail.com",
-    "url"   : "http://d.hatena.ne.jp/unageanu"
+    "name": "Masaya Yamauchi",
+    "email": "masaya.yamauchi@gmail.com",
+    "url": "http://d.hatena.ne.jp/unageanu"
   },
-  "licenses": [{
-    "type": "BSD-3-Clause-Clear",
-    "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
-    
-  }],
+  "licenses": [
+    {
+      "type": "BSD-3-Clause-Clear",
+      "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/unageanu/container-js/issues"
   },
