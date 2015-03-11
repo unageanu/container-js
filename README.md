@@ -3,16 +3,16 @@
 
 # About
 
-ContainerJS is a Dependency Injection Container for JavaScript Application.
+ContainerJS is a Dependency Injection Container for JavaScript Web Application.
 
 # Features
 
 - **Dependency Resolution and Injection**
- - ContainerJS is responsible for the generation of container-managed objects, and the resolution and injection of its dependent components.
+ - ContainerJS is responsible for the creation of container-managed objects, and the resolution and injection of its dependent components.
      - You can specify a dependency in the component definition by JavaScript code, or can be defined declaratively in the class.
      - Since there is no interface in JavaScript, dependency resolution is done in the name assigned to the component.
  - By using the dependency injection container, you can automate the wiring.
- - Because of the component is cached by the container, you can reduce the generation of unnecessary objects.
+ - Because of the component is cached by the container, you can reduce the creation of unnecessary objects.
 
 - **Lazy Module Loading**
  - It loads the required modules lazily and asynchronously by working with the require.js.

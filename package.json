@@ -1,8 +1,8 @@
 {
   "name": "container-js",
   "version": "1.0.3",
-  "description": "ContainerJS is a Dependency Injection Container for JavaScript Application.",
-  "main": "gulpfile.js",
+  "description": "Dependency Injection Container for JavaScript Web Application.",
+  "main": "minified/container.js",
   "directories": {
     "test": "test"
   },
@@ -20,7 +20,7 @@
     "rimraf": "^2.3.1"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": ">=0.10.0"
   },
   "scripts": {
     "build": "gulp",
@@ -39,13 +39,16 @@
     "Aspect oriented programming",
     "Lazily module loading"
   ],
-  "author": "masaya yamauchi <masaya.yamauchi@gmail.com>",
-  "licenses": [
-    {
-      "type": "New BSD License",
-      "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
-    }
-  ],
+  "author": {
+    "name"  : "Masaya Yamauchi",
+    "email" : "masaya.yamauchi@gmail.com",
+    "url"   : "http://d.hatena.ne.jp/unageanu"
+  },
+  "licenses": [{
+    "type": "BSD-3-Clause-Clear",
+    "url": "https://github.com/unageanu/container-js/blob/master/LICENSE.txt"
+    
+  }],
   "bugs": {
     "url": "https://github.com/unageanu/container-js/issues"
   },

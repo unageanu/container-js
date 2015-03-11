@@ -3,7 +3,7 @@
 
 # 概要
 
-ContainerJSは、JavaScriptアプリケーション用の Dipendency Injection コンテナです。
+ContainerJSは、JavaScript Web アプリケーション用の Dipendency Injection コンテナです。
 
 # 特徴
 
