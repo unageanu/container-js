@@ -1,9 +1,9 @@
 define([
-    "containerjs/loader",
+    "containerjs/loaders",
     "containerjs/binder",
     "containerjs/scope",
     "containerjs/utils/deferred"
-], function( loader, Binder, scope, Deferred ){
+], function( Loader, Binder, scope, Deferred ){
     
     "use strict";
 
@@ -13,7 +13,7 @@ define([
      * @param {function(container.Binder):void} module 
      * @param {container.PackagingPolicy?} defaultPackagingPolicy
      */
-    var Container = function Container ( module, defaultPackagingPolicy ) {
+    var Container = function Container ( module, defaultPackagingPolicy, loader ) {
         
         /** @type {Object.<string, Array.<container.Binding.<*>>>} */
         this.bindings = null;
@@ -29,7 +29,7 @@ define([
         this.createRequestSerial = 1;
         
         this.load(module, defaultPackagingPolicy);
-        this.loader = loader;
+        this.loader = loader || Loader.AMD;
         this.onEagerSingletonConponentsInitialized =
             this.createEagerSingletonConponents(this);
         

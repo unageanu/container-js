@@ -21,7 +21,7 @@ define( [
      * @class 
      * @implements {container.Loader}
      */
-    var RequireJsLoader = {
+    var AMDLoader = {
         load : function( moduleName ) {
             var d = new Deferred();
             try {
@@ -37,5 +37,24 @@ define( [
         }
     };
     
-    return Object.freeze(RequireJsLoader);
+    /** 
+     * @class 
+     * @implements {container.Loader}
+     */
+    var CommonJsLoader = {
+        load : function( moduleName ) {
+            var d = new Deferred();
+            try {
+                d.resolve( require( moduleName ));
+            } catch (e) {
+                d.reject(e);
+            }
+            return d;
+        }
+    };
+        
+    return Object.freeze({
+        COMMON_JS: CommonJsLoader,
+        AMD:       AMDLoader
+    });
 });

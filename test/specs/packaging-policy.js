@@ -142,4 +142,37 @@ define([
         
     });
     
+    describe('PackagingPolicy.COMMON_JS_MODULE_PER_CLASS', function() {
+        
+        var policy = PackagingPolicy.COMMON_JS_MODULE_PER_CLASS;
+        beforeEach(function() {
+            module = "Foo";
+        });
+        
+        it( "assumes that the module is defined for each class.", function() {
+            expect( policy.resolveModuleFor("com.example.Foo") ).toEqual( "./com/example/foo" );
+            expect( policy.resolveModuleFor("com.example.test.FooVar") ).toEqual( "./com/example/test/foo-var" );
+            expect( policy.resolveModuleFor("com.Foo") ).toEqual( "./com/foo" );
+            
+            expect( policy.retrieve( loader, "com.example.Foo" ) ).toResolveWith( "Foo" );
+            expect( policy.retrieve( loader, "com.example.test.Var" ) ).toResolveWith( "Foo" );
+            expect( policy.retrieve( loader, "Foo", "com/example" ) ).toResolveWith( "Foo" );
+        });
+        
+        it( "raises an error when the componentName is not valid.", function() {
+            expect( policy.retrieve(loader, "") ).toRejectWith( 
+                new Error("componentName is empty string.") );
+            expect( policy.retrieve(loader, null) ).toRejectWith( 
+                new Error("componentName is null or undefined."));
+            expect( policy.retrieve(loader, undefined) ).toRejectWith( 
+                new Error("componentName is null or undefined.") );
+        });
+        
+        it( "raises an error when the component is not defined.", function() {
+            module = null;
+            expect( policy.retrieve(loader, "com.example.NotFound") ).toRejectWith(
+                new Error( "componenet 'com.example.NotFound' is not found in module './com/example/not-found'." ));
+        });
+        
+    });
 });

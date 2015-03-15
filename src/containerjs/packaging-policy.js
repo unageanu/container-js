@@ -103,6 +103,15 @@ define([
         }
     }));
     
+    policies.COMMON_JS_MODULE_PER_CLASS = Object.freeze( Object.create( policies.MODULE_PER_CLASS, {
+        /** @private */
+        resolveModuleFor : {
+            value : function( componentName ) {
+                return "./" + policies.MODULE_PER_CLASS.resolveModuleFor(componentName);
+            }
+        }
+    }));
+    
     policies.DEFAULT = policies.MODULE_PER_CLASS;
     
     /** @private */
