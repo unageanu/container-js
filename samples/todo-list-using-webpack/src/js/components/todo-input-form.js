@@ -1,5 +1,4 @@
 import React       from 'react';
-import TodoView    from './todo-view';
 import ContainerJS from 'container-js';
 
 export default React.createClass({
