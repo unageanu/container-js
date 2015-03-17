@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+body {
+  padding:10px;
+  color: #333;
+}
+button {
+  padding: 3px 15px;
+}
+
+.todo-input-form {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.todo-input-form .title-field {
+  width: 200px;
+}
+.todo-input-form .error {
+  color: #fa1188;
+}
+
+.todo-list {
+  margin-left: 10px;
+}
+
+.todo {
+  margin-top: 10px;
+}
+.todo span{
+  padding-right: 5px;
+}
+.todo .title {
+  font-size: 110%;
+}
+.todo .last-modified {
+  font-size: 80%;
+  color: #999;
+}
+.todo .commands a {
+  padding-right: 5px;
+}
+
+.buttons {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
