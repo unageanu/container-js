@@ -1,6 +1,6 @@
 {
   "name": "container-js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Dependency Injection Container for JavaScript Web Application.",
   "main": "minified/container.js",
   "directories": {
