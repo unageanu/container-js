@@ -13,17 +13,15 @@ ContainerJS is a Dependency Injection Container for JavaScript Web Application.
      - Since there is no interface in JavaScript, dependency resolution is done in the name assigned to the component.
  - By using the dependency injection container, you can automate the wiring.
  - Because of the component is cached by the container, you can reduce the creation of unnecessary objects.
-
 - **Lazy Module Loading**
  - It loads the required modules lazily and asynchronously by working with the require.js.
  - Until the component is actually used by the user's operation or the like, you can delay the loading and evaluation of the JavaScript source.
-
 - **Supports Aspect Oriented Programing**
  - You can weave a method interceptor to a container-managed component.
  - You can aggregate a cross-class features like a performance measurement, into the interceptor.
 
 # License
-[New BSD License](http://opensource.org/licenses/BSD-3-Clause) 
+[New BSD License](http://opensource.org/licenses/BSD-3-Clause)
 
 # Dependent Libraries
 
@@ -62,42 +60,42 @@ file layout:
 scripts/app/model.js:
 
     define(["utils/observable"], function(Observable){
-    
+
          "use strict";
-    
+
          /**
          * @class
          */
         var Model = function() {};
-        
+
         Model.prototype = new Observable();
-        
+
         /**
          * @public
          */
         Model.prototype.initialize = function() {
-            this.fire( "updated", { 
-                property: "message", 
+            this.fire( "updated", {
+                property: "message",
                 value :"hello world."
             });
         };
-    
+
         return Model;
     });
 
 scripts/app/view.js:
 
     define(["container"], function( ContainerJS ){
-        
+
         "use strict";
-        
+
         /**
          * @class
          */
         var View = function() {
             this.model = ContainerJS.Inject("app.Model");
         };
-        
+
         /**
          * @public
          */
@@ -105,10 +103,10 @@ scripts/app/view.js:
             this.model.addObserver("updated", function( ev ) {
                 if ( ev.property != "message" ) return;
                 var e = document.getElementById(this.elementId);
-                e.innerHTML = ev.value; 
+                e.innerHTML = ev.value;
             }.bind(this));
         };
-        
+
         return View;
     });
 
@@ -118,25 +116,25 @@ scripts/app/main.js:
         baseUrl: "scripts",
     });
     require(["container"], function( ContainerJS ) {
-        
+
         var container = new ContainerJS.Container( function( binder ){
-            
+
             binder.bind("app.View").withProperties({
                 elementId : "console"
             }).onInitialize("initialize")
             .inScope(ContainerJS.Scope.EAGER_SINGLETON);
-            
+
             binder.bind("app.Model");
-            
+
         });
         container.onEagerSingletonConponentsInitialized.then(function() {
             container.get("app.Model").then(function( model ){
                 model.initialize();
             }, function( error ) {
-                alert( error.toString() ); 
+                alert( error.toString() );
             });
         });
-        
+
     });
 
 index.html:
@@ -188,7 +186,7 @@ app/class.js:
         /**
          * @class
          */
-        var Class = function(arg) { 
+        var Class = function(arg) {
             this.foo = args.foo;
             this.var = args.var;
         };
@@ -328,17 +326,17 @@ file layout:
 app/foo.js:
 
     define(function(){
-    
+
         /**
          * @class
          */
         var HogeHoge = function(arg) {};
-        
+
         /**
          * @class
          */
         var FugaFuga = function(arg) {};
-        
+
         return {
             HogeHoge : HogeHoge,
             FugaFuga : FugaFuga
@@ -366,17 +364,17 @@ file layout:
 app.js:
 
     define(function(){
-    
+
         /**
          * @class
          */
         var HogeHoge = function(arg) {};
-        
+
         /**
          * @class
          */
         var FugaFuga = function(arg) {};
-        
+
         return {
             foo : {
                 HogeHoge : HogeHoge,
@@ -442,7 +440,7 @@ Example:
         /**
          * @class
          */
-        var Class = function() { 
+        var Class = function() {
             this.a = ContainerJS.Inject;
             this.b = ContainerJS.Inject("foo.var");
             this.c = ContainerJS.Inject.all;
@@ -452,9 +450,9 @@ Example:
         };
         Class.prototype.method1 = {
             this.e.then( function(component) {
-                // 
+                //
             }, function(error) {
-                // 
+                //
             } )
         };
         return Class;
@@ -484,7 +482,7 @@ You can register a function to be called when creating and destroying components
 Example:
 
     var c = new ContainerJS.Container( function( binder ) {
-        
+
         // specifies the component method name.
         binder.bind( "Foo" ).onInitialize("initialize").onDestroy("dispose");
 
@@ -494,7 +492,7 @@ Example:
         }).onDestroy( function( component, container ) {
             component.dispose();
         });
-    
+
     });
 
 ### Method Interception
@@ -508,9 +506,9 @@ You can weave an interceptor to a method of the component.
 Example:
 
         var container = new ContainerJS.Container( function( binder ){
-            
+
             binder.bind("app.Component");
-            
+
             binder.bindInterceptor( function( jointpoint ) {
                jointpoint.methodName;
                jointpoint.self;

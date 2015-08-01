@@ -1,9 +1,9 @@
 define( function(){
-    
+
     "use strict";
-    
+
     /**
-     * @interface 
+     * @interface
      * @template V, E value type, error type
      */
     var Promise = {};
@@ -11,25 +11,25 @@ define( function(){
     /**
      * @param {function(V):R} successCallback
      * @param {function(E):R} failCallback
-     * @return {Promise.<R,*>} 
+     * @return {Promise.<R,*>}
      */
     Promise.then = function( successCallback, failCallback ){};
 
     /**
      * @param {function((V|E)):R} callback
-     * @return {Promise.<R,*>} 
+     * @return {Promise.<R,*>}
      */
     Promise.always = function( callback ){};
 
     /**
      * @param {function(V):R} successCallback
-     * @return {Promise.<R,*>} 
+     * @return {Promise.<R,*>}
      */
     Promise.done = function( successCallback ){};
 
     /**
      * @param {function(E):R} failCallback
-     * @return {Promise.<R,*>} 
+     * @return {Promise.<R,*>}
      */
     Promise.fail = function( failCallback ){};
 
@@ -40,24 +40,24 @@ define( function(){
      * @return {Promise.<X,Y>}
      */
     Promise.pipe = function( resultFilter, errorFilter ){};
-    
+
     /**
-     * @return {boolean} 
+     * @return {boolean}
      */
     Promise.fixed = function(){};
-    
+
     /**
-     * @return {boolean} 
+     * @return {boolean}
      */
     Promise.rejected = function(){};
-    
+
     /**
-     * @return {boolean} 
+     * @return {boolean}
      */
     Promise.resolved = function(){};
-    
+
     /**
-     * @class 
+     * @class
      * @implements {Promise}
      */
     var Deferred = function(){
@@ -67,12 +67,14 @@ define( function(){
         this.failCallbacks = [];
         Object.seal( this );
     };
-    
+
     /** @override */
     Deferred.prototype.then = function( successCallback, failCallback ){
         var d = new Deferred();
-        this.state.done.call(this, successCallback, d);
-        this.state.fail.call(this, failCallback, d);
+        this.state.done.call(this,
+          successCallback || defaultSuccessCallback, d);
+        this.state.fail.call(this,
+          failCallback || defaultFailCallback, d);
         return d;
     };
     /** @override */
@@ -82,18 +84,20 @@ define( function(){
     /** @override */
     Deferred.prototype.done = function( successCallback ){
         var d = new Deferred();
-        this.state.done.call(this, successCallback, d);
+        this.state.done.call(this,
+          successCallback || defaultSuccessCallback, d);
         return d;
     };
     /** @override */
     Deferred.prototype.fail = function( failCallback ){
         var d = new Deferred();
-        this.state.fail.call(this, failCallback, d);
+        this.state.fail.call(this,
+          failCallback || defaultFailCallback, d);
         return d;
     };
     /**
      * @param {V} result
-     * @return {Deferred.<V,E>} this 
+     * @return {Deferred.<V,E>} this
      */
     Deferred.prototype.resolve = function( result ){
         this.state.resolve.call(this, result);
@@ -101,13 +105,13 @@ define( function(){
     };
     /**
      * @param {E} error
-     * @return {Deferred.<V,E>} this 
+     * @return {Deferred.<V,E>} this
      */
     Deferred.prototype.reject = function( error ){
         this.state.reject.call(this, error);
         return this;
     };
-    
+
     /** @override */
     Deferred.prototype.fixed = function(){
         return this.rejected() || this.resolved();
@@ -120,7 +124,7 @@ define( function(){
     Deferred.prototype.resolved = function(){
         return this.state === states.resolved;
     };
-    
+
     /**
      * @return {Promise.<V,E>}
      */
@@ -136,7 +140,7 @@ define( function(){
             resolved : this.resolved.bind( this )
         });
     };
-    
+
     /** @override */
     Deferred.prototype.pipe = function( resultFilter, errorFilter ) {
         var d = new Deferred();
@@ -154,7 +158,7 @@ define( function(){
         });
         return d.promise();
     };
-    
+
     /**
      * @template <X>
      * @param {X} value
@@ -165,7 +169,7 @@ define( function(){
         d.resolve(value);
         return d.promise();
     };
-    
+
     /**
      * @template <X>
      * @param {X} error
@@ -176,7 +180,7 @@ define( function(){
         d.reject(error);
         return d.promise();
     };
-    
+
     /**
      * @template <X>
      * @param {Array.<Deferred.<X,*>>} deferreds
@@ -203,7 +207,7 @@ define( function(){
         }
         return d.promise();
     };
-    
+
     /**
      * @param {*} object
      * @return {boolean}
@@ -214,7 +218,7 @@ define( function(){
         }
         return true;
     };
-    
+
     /**
      * @template <X>
      * @param {function():X} procedure
@@ -236,7 +240,7 @@ define( function(){
         }
         return d.promise();
     };
-    
+
     /**
      * @param {Promise.<V,E>} deferred
      * @return {V}
@@ -253,7 +257,7 @@ define( function(){
         if ( error ) throw error;
         return result;
     };
-    
+
     /**
      * @template <X>
      * @param {function(*):X} procedure
@@ -264,7 +268,7 @@ define( function(){
             return Deferred.pack( procedure, this, arguments );
         };
     };
-    
+
     /**
      * @template <X>
      * @param {function(*):X} procedure
@@ -306,7 +310,7 @@ define( function(){
         };
         return d;
     };
-    
+
     /** @private */
     var alreadyFixed = function() {
         throw new Error("already resolved or rejected.");
@@ -374,6 +378,9 @@ define( function(){
             reject :  alreadyFixed
         }
     };
-    
+
+    var defaultSuccessCallback = function(result) {return result;}
+    var defaultFailCallback    = function(error)  {throw  error;}
+
     return Deferred;
 });
